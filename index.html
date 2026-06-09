@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Discovery &amp; Website Redesign — Greg Sher Brand Experience</title>
+  <meta name="description" content="Website audit, platform redesign options, and interactive discovery questionnaire for gregsher.biz.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* CSS Variables for Light/Dark Theme */
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --accent: #4f46e5;
+      --accent-light: #e0e7ff;
+      --accent-hover: #4338ca;
+      --accent-cyan: #0ea5e9;
+      --accent-cyan-light: #e0f2fe;
+      --border-color: #e2e8f0;
+      
+      --table-hdr-bg: #1e293b;
+      --table-hdr-txt: #ffffff;
+      --table-hover: #f1f5f9;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      
+      --success: #10b981;
+      --success-light: #d1fae5;
+      --warning: #f59e0b;
+      --warning-light: #fef3c7;
+      --danger: #ef4444;
+      --danger-light: #fee2e2;
+      
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #09090b;
+      --bg-secondary: #18181b;
+      --text-primary: #f4f4f5;
+      --text-secondary: #a1a1aa;
+      --accent: #6366f1;
+      --accent-light: #1e1b4b;
+      --accent-hover: #818cf8;
+      --accent-cyan: #38bdf8;
+      --accent-cyan-light: #0c4a6e;
+      --border-color: #27272a;
+      
+      --table-hdr-bg: #27272a;
+      --table-hdr-txt: #f4f4f5;
+      --table-hover: rgba(39, 39, 42, 0.4);
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+      
+      --success: #34d399;
+      --success-light: #064e3b;
+      --warning: #fbbf24;
+      --warning-light: #78350f;
+      --danger: #f87171;
+      --danger-light: #7f1d1d;
+    }
+
+    /* Reset Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Layout */
+    .wrapper {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Sidebar Navigation */
+    aside {
+      background-color: var(--bg-secondary);
+      border-right: 1px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .brand-section {
+      margin-bottom: 2rem;
+    }
+
+    .evoltech-logo {
+      max-width: 155px;
+      height: auto;
+      display: block;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .logo-divider {
+      border: 0;
+      height: 1px;
+      background: var(--border-color);
+      margin: 1.75rem 0;
+      width: 100%;
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-cyan);
+      margin-top: 0.25rem;
+      font-weight: 700;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex-grow: 1;
+    }
+
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-nav a:hover {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+    }
+
+    .sidebar-nav a.active {
+      background-color: var(--accent-light);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .sidebar-nav a svg {
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Header Actions */
+    .top-header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    [data-theme="dark"] .top-header {
+      background-color: rgba(24, 24, 27, 0.8);
+    }
+
+    .report-meta-tags {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .meta-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .tag-draft {
+      background-color: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .tag-client {
+      background-color: var(--accent-cyan-light);
+      color: var(--accent-cyan);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: var(--accent);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--bg-primary);
+      border-color: var(--text-secondary);
+    }
+
+    /* Content Layout */
+    main {
+      padding: 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-primary);
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    section {
+      scroll-margin-top: 100px;
+      margin-bottom: 4rem;
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: 2.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title svg {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 1.25rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.65;
+    }
+
+    /* Responsive Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      background-color: var(--bg-secondary);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    th {
+      background-color: var(--table-hdr-bg);
+      color: var(--table-hdr-txt);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+      letter-spacing: 0.03em;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 1.125rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: var(--table-hover);
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-success {
+      background-color: var(--success-light);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      background-color: var(--warning-light);
+      color: var(--warning);
+    }
+
+    .badge-danger {
+      background-color: var(--danger-light);
+      color: var(--danger);
+    }
+
+    .badge-info {
+      background-color: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* Score input badge style */
+    .score-input {
+      width: 55px;
+      padding: 0.35rem 0.5rem;
+      border: 1px dashed var(--border-color);
+      border-radius: var(--radius-sm);
+      background: var(--bg-primary);
+      color: var(--accent);
+      font-weight: 800;
+      text-align: center;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .score-input:hover {
+      border-color: var(--accent);
+      background: var(--bg-secondary);
+    }
+
+    .score-input:focus {
+      outline: none;
+      border-style: solid;
+      border-color: var(--accent);
+      background: var(--bg-secondary);
+      box-shadow: 0 0 0 2px var(--accent-light);
+    }
+
+    /* Remove Spinners */
+    .score-input::-webkit-outer-spin-button,
+    .score-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .score-input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    .total-score-cell {
+      background-color: var(--bg-primary);
+      font-weight: 700;
+    }
+
+    .total-score-val {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .score-bar {
+      width: 100%;
+      height: 6px;
+      background-color: var(--border-color);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      background-color: var(--accent);
+      width: 0%;
+      border-radius: 9999px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Recommendation Cards */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .rec-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      background-color: var(--bg-secondary);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .rec-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--border-color);
+    }
+
+    .rec-card.rec-budget::before {
+      background: var(--warning);
+    }
+
+    .rec-card.rec-premium::before {
+      background: var(--accent);
+    }
+
+    .rec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+
+    .rec-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .rec-score-badge {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--accent);
+      background-color: var(--accent-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .rec-bullets {
+      margin: 1.25rem 0;
+      list-style-type: none;
+    }
+
+    .rec-bullets li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    .rec-bullets li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .rec-bullets.cons li::before {
+      content: "✗";
+      color: var(--danger);
+    }
+
+    .rec-footer {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.25rem;
+      margin-top: auto;
+    }
+
+    .rec-usecase {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    /* Assets Box Card */
+    .link-card {
+      background-color: var(--bg-primary);
+      border: 1px dashed var(--accent-cyan);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .link-icon-container {
+      background-color: var(--accent-cyan-light);
+      color: var(--accent-cyan);
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Questionnaire Form fields */
+    .questionnaire-group {
+      margin-bottom: 2rem;
+    }
+
+    .questionnaire-group-title {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      border-left: 3px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+
+    .q-table td {
+      vertical-align: middle;
+    }
+
+    .q-field-container {
+      width: 100%;
+    }
+
+    .q-textarea {
+      width: 100%;
+      height: 75px;
+      padding: 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.875rem;
+      resize: vertical;
+      transition: all 0.2s ease;
+    }
+
+    .q-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: var(--bg-secondary);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .q-select {
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .q-select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: var(--bg-secondary);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .questionnaire-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      background: var(--bg-primary);
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border-color);
+      justify-content: flex-end;
+    }
+
+    /* Print-Friendly Settings */
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-size: 11pt;
+      }
+      .wrapper {
+        display: block !important;
+      }
+      aside, .top-header, .header-actions, .questionnaire-actions, .theme-toggle, .btn {
+        display: none !important;
+      }
+      main {
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      section {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-bottom: 2.5rem !important;
+        page-break-inside: avoid;
+      }
+      .section-title {
+        border-bottom: 1px solid #000000 !important;
+        margin-top: 1.5rem;
+      }
+      table {
+        border: 1px solid #000000 !important;
+        page-break-inside: avoid;
+      }
+      th {
+        background-color: #f1f5f9 !important;
+        color: #000000 !important;
+        border-bottom: 2px solid #000000 !important;
+      }
+      td {
+        border-bottom: 1px solid #e2e8f0 !important;
+        color: #000000 !important;
+      }
+      .score-input {
+        border: none !important;
+        background: transparent !important;
+        width: auto !important;
+      }
+      .q-textarea, .q-select {
+        border: 1px solid #cccccc !important;
+        background: transparent !important;
+      }
+      .score-bar {
+        border: 1px solid #000000 !important;
+        background-color: transparent !important;
+      }
+      .score-bar-fill {
+        background-color: #666666 !important;
+      }
+    }
+
+    /* Mobile settings */
+    @media (max-width: 1024px) {
+      .wrapper {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.5rem;
+      }
+      .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        gap: 0.5rem;
+      }
+      .sidebar-nav a {
+        white-space: nowrap;
+      }
+      .top-header {
+        padding: 1rem 1.5rem;
+      }
+      main {
+        padding: 1.5rem;
+      }
+      section {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Toast Notification styles */
+    .toast-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      border: 1px solid var(--border-color);
+      max-width: 380px;
+    }
+
+    .toast-container.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+    <!-- Left Sidebar: Index Navigation & Global Branding -->
+    <aside>
+      <div class="brand-section">
+        <svg width="196" height="32" viewBox="0 0 196 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="evoltech-logo">
+          <path d="M140.801 21.3512C140.801 21.0631 140.925 20.7891 141.142 20.5992L162.98 1.45457C163.626 0.887909 164.639 1.34692 164.639 2.20653V10.6488C164.639 10.9369 164.515 11.2109 164.298 11.4008L142.46 30.5454C141.814 31.1121 140.801 30.6531 140.801 29.7935V21.3512Z" fill="#8DCAFF"/>
+          <path d="M156.07 21.3512C156.07 21.0631 156.195 20.7891 156.411 20.5992L178.249 1.45457C178.896 0.887909 179.908 1.34692 179.908 2.20653V10.6488C179.908 10.9369 179.784 11.2109 179.568 11.4008L157.73 30.5454C157.083 31.1121 156.07 30.6531 156.07 29.7935V21.3512Z" fill="#4C96D7"/>
+          <path d="M171.33 21.3512C171.33 21.0631 171.454 20.7891 171.671 20.5992L193.509 1.45457C194.155 0.887909 195.168 1.34692 195.168 2.20653V10.6488C195.168 10.9369 195.044 11.2109 194.827 11.4008L172.989 30.5454C172.343 31.1121 171.33 30.6531 171.33 29.7935V21.3512Z" fill="#1761A0"/>
+          <path d="M4.74922 23.7763H14.9015V28.3183H0V4.23225H14.7295V8.77419H4.74922V13.9011H13.8691V18.3742H4.74922V23.7763Z" fill="currentColor"/>
+          <path d="M28.6768 11.114H33.5637L27.0249 28.3183H21.966L15.4272 11.114H20.3141L24.4782 23.157L28.6768 11.114Z" fill="currentColor"/>
+          <path d="M49.0046 26.1849C47.238 27.9283 45.0813 28.8 42.5346 28.8C39.9879 28.8 37.8313 27.9283 36.0647 26.1849C34.321 24.4186 33.4492 22.2624 33.4492 19.7161C33.4492 17.1699 34.321 15.0251 36.0647 13.2817C37.8313 11.5154 39.9879 10.6323 42.5346 10.6323C45.0813 10.6323 47.238 11.5154 49.0046 13.2817C50.7712 15.0251 51.6545 17.1699 51.6545 19.7161C51.6545 22.2624 50.7712 24.4186 49.0046 26.1849ZM39.1964 23.1226C40.0912 24.0172 41.2039 24.4645 42.5346 24.4645C43.8653 24.4645 44.9781 24.0172 45.8729 23.1226C46.7676 22.228 47.215 21.0925 47.215 19.7161C47.215 18.3398 46.7676 17.2043 45.8729 16.3097C44.9781 15.415 43.8653 14.9677 42.5346 14.9677C41.2039 14.9677 40.0912 15.415 39.1964 16.3097C38.3246 17.2043 37.8886 18.3398 37.8886 19.7161C37.8886 21.0925 38.3246 22.2624 39.1964 23.1226Z" fill="currentColor"/>
+          <path d="M54.0893 28.3183V3.2H58.5288V28.3183H54.0893Z" fill="currentColor"/>
+          <path d="M77.6658 4.23225V5.95268H70.0946V28.3183H68.2362V5.95268H60.665V4.23225H77.6658Z" fill="currentColor"/>
+          <path d="M84.3834 10.7355C86.9071 10.7355 88.9491 11.6301 90.5092 13.4193C92.0923 15.2086 92.8838 17.3305 92.8838 19.7849C92.8838 19.8767 92.8723 20.0143 92.8494 20.1978C92.8494 20.3814 92.8494 20.519 92.8494 20.6107H77.2596C77.466 22.5376 78.2346 24.0975 79.5653 25.2903C80.919 26.4602 82.5823 27.0452 84.5555 27.0452C85.932 27.0452 87.1366 26.7584 88.169 26.1849C89.2014 25.6115 89.9815 24.8545 90.5092 23.914L92.0234 24.8086C91.3122 26.0014 90.3027 26.9534 88.9949 27.6645C87.6872 28.3527 86.1959 28.6968 84.521 28.6968C81.8826 28.6968 79.7145 27.8595 78.0167 26.1849C76.3189 24.4874 75.47 22.3312 75.47 19.7161C75.47 17.1469 76.2959 15.0136 77.9478 13.3161C79.6227 11.5957 81.7679 10.7355 84.3834 10.7355ZM84.3834 12.3871C82.4332 12.3871 80.8043 12.995 79.4965 14.2107C78.1887 15.4265 77.4431 16.9978 77.2596 18.9247H91.0942C90.9107 16.8831 90.1765 15.2889 88.8917 14.1419C87.6298 12.972 86.1271 12.3871 84.3834 12.3871Z" fill="currentColor"/>
+          <path d="M103.41 28.6968C100.818 28.6968 98.6609 27.8366 96.9402 26.1161C95.2194 24.3957 94.3591 22.2624 94.3591 19.7161C94.3591 17.1699 95.2194 15.0366 96.9402 13.3161C98.6609 11.5957 100.818 10.7355 103.41 10.7355C105.085 10.7355 106.599 11.1369 107.953 11.9398C109.306 12.7197 110.293 13.7864 110.912 15.1398L109.502 15.9656C108.997 14.8645 108.194 13.9928 107.092 13.3505C106.014 12.7082 104.787 12.3871 103.41 12.3871C101.345 12.3871 99.613 13.0982 98.2135 14.5204C96.814 15.9197 96.1142 17.6516 96.1142 19.7161C96.1142 21.7806 96.814 23.524 98.2135 24.9462C99.613 26.3455 101.345 27.0452 103.41 27.0452C104.787 27.0452 106.014 26.724 107.092 26.0817C108.194 25.4394 109.031 24.5677 109.605 23.4667L111.05 24.3269C110.362 25.6573 109.329 26.724 107.953 27.5269C106.599 28.3068 105.085 28.6968 103.41 28.6968Z" fill="currentColor"/>
+          <path d="M121.325 10.7355C123.366 10.7355 124.984 11.3663 126.177 12.628C127.393 13.8667 128.001 15.5297 128.001 17.6172V28.3183H126.246V17.6172C126.246 16.0115 125.798 14.7383 124.904 13.7978C124.032 12.8573 122.793 12.3871 121.187 12.3871C119.42 12.3871 117.975 12.972 116.851 14.1419C115.726 15.3118 115.164 17.0093 115.164 19.2344V28.3183H113.444V4.23225H115.164V14.3828C116.403 11.9513 118.457 10.7355 121.325 10.7355Z" fill="currentColor"/>
+        </svg>
+        <hr class="logo-divider">
+        <div class="brand-title">
+          GREG SHER
+          <span class="brand-subtitle">Discovery &amp; Redesign</span>
+        </div>
+      </div>
+      
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#website-analysis" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website Analysis
+          </a>
+        </li>
+        <li>
+          <a href="#content-audit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Content Audit
+          </a>
+        </li>
+        <li>
+          <a href="#video-podcast-mgmt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7a2 2 0 0 0-2.45-1.45L16 7V5a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2l4.55 1.45A2 2 0 0 0 23 17V7z"/></svg>
+            Video Management
+          </a>
+        </li>
+        <li>
+          <a href="#architecture-comparison">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            Redesign Approaches
+          </a>
+        </li>
+        <li>
+          <a href="#recommended-architectures">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Strategic Pathways
+          </a>
+        </li>
+        <li>
+          <a href="#discovery-questionnaire">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="10" y2="15"/><line x1="15" y1="15" x2="15" y2="15"/><line x1="9" y1="19" x2="10" y2="19"/><line x1="15" y1="19" x2="15" y2="19"/></svg>
+            Intake Questionnaire
+          </a>
+        </li>
+        <li>
+          <a href="#final-recommendation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Assessment Summary
+          </a>
+        </li>
+      </ul>
+
+      <div style="font-size: 0.75rem; color: var(--text-secondary); text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+        Partnered with <strong>Evoltech</strong>
+      </div>
+    </aside>
+
+    <!-- Right Content Area -->
+    <div style="display: flex; flex-direction: column; width: 100%;">
+      
+      <!-- Top Action Bar -->
+      <header class="top-header">
+        <div class="report-meta-tags">
+          <span class="meta-tag tag-draft">Redesign Assessment</span>
+          <span class="meta-tag tag-client">Client: gregsher.biz</span>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline theme-toggle" id="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <svg id="theme-icon" style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2;" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span id="theme-toggle-txt" style="margin-left: 8px;">Dark Mode</span>
+          </button>
+          <button class="btn btn-primary" onclick="window.print()">
+            <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; margin-right:8px;" viewBox="0 0 24 24">
+              <polyline points="6 9 6 2 18 2 18 9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect x="6" y="14" width="12" height="8"/>
+            </svg>
+            Print / Save PDF
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Document Body -->
+      <main>
+        <div class="brand-section" style="border-bottom: 1px solid var(--border-color); padding-bottom: 2rem; margin-bottom: 3rem;">
+          <h1>Discovery &amp; Redesign Assessment</h1>
+          <p class="subtitle" style="margin-bottom: 0.5rem;">Strategic Platform Redesign Options for Greg Sher</p>
+          <div style="display: flex; gap: 2rem; font-size: 0.8rem; color: var(--text-secondary);">
+            <div><strong>Client Site:</strong> <a href="https://www.gregsher.biz/" target="_blank" style="color: var(--accent); text-decoration: none;">gregsher.biz</a></div>
+            <div><strong>Redesign Partner:</strong> Evoltech Group</div>
+            <div><strong>Date:</strong> June 9, 2026</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Website Analysis -->
+        <section id="website-analysis">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            1. Website Analysis
+          </h2>
+          <p>
+            An assessment of the current <strong>gregsher.biz</strong> website. Built on Wix, the platform represents Greg Sher's professional brand, thought leadership, speaking events, and consulting. Our audit of the site identified 24 speaking/keynote videos, 11 "One on One" interview videos, 12 guest podcast appearances, 13 news publications, and 3 paid training challenges.
+          </p>
+          
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Area</th>
+                  <th style="width: 40%;">Current State &amp; Observations</th>
+                  <th style="width: 35%;">Redesign Opportunities</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Platform &amp; Type</strong></td>
+                  <td>Wix Personal Brand, Content Hub &amp; Training Portfolio.</td>
+                  <td>Enhance branding aesthetics and build a high-performance visual experience.</td>
+                </tr>
+                <tr>
+                  <td><strong>Key Goals</strong></td>
+                  <td>Keynote bookings, consulting inquiries, and paid training challenge sales.</td>
+                  <td>Streamline conversion flows and booking calendars.</td>
+                </tr>
+                <tr>
+                  <td><strong>Media &amp; Feed Strategy</strong></td>
+                  <td>Curated directories of WBAL history, WNFMTV, and 35+ YouTube embeds updated manually.</td>
+                  <td>Automate YouTube feed integration to keep video pages fresh with zero client effort.</td>
+                </tr>
+                <tr>
+                  <td><strong>Performance &amp; SEO</strong></td>
+                  <td>Wix managed metadata. Some news links have typos (e.g. Article 7 protocol error). Performance feels heavy on mobile.</td>
+                  <td>Optimize media assets, fix malformed links, and inject clean SEO schemas (Event, Course, Video).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 2: Existing Content Audit -->
+        <section id="content-audit">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            2. Existing Content Audit
+          </h2>
+          <p>
+            An inventory of the primary content blocks and directories currently live on the website:
+          </p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Content Type</th>
+                  <th style="width: 20%;">Current State</th>
+                  <th style="width: 55%;">Observations &amp; Recommendations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Home Page</strong></td>
+                  <td><span class="badge badge-success">Exists</span></td>
+                  <td>Prominently features bio timeline links, book publications, and WNFMTV/ALLOFUS initiatives. Recommend cleaner layouts and high-speed asset optimization.</td>
+                </tr>
+                <tr>
+                  <td><strong>About Page</strong></td>
+                  <td><span class="badge badge-success">Exists</span></td>
+                  <td>Chronological timeline highlighting Greg's 25+ year mortgage and radio sports career. Needs a modern, visually striking timeline design.</td>
+                </tr>
+                <tr>
+                  <td><strong>Videos &amp; Interviews</strong></td>
+                  <td><span class="badge badge-success">Exists</span></td>
+                  <td>Splits into 27 keynote/speaking videos and 30+ "One on One" interview videos. We recommend unified tagging and search functionality.</td>
+                </tr>
+                <tr>
+                  <td><strong>Podcasts Page</strong></td>
+                  <td><span class="badge badge-success">Exists</span></td>
+                  <td>Includes 12 podcast appearances linking out to Apple and Spotify. Recommend adding a search engine for past episodes.</td>
+                </tr>
+                <tr>
+                  <td><strong>News &amp; Publications</strong></td>
+                  <td><span class="badge badge-success">Exists</span></td>
+                  <td>13 articles quoting Greg. Clean up malformed URLs (e.g. Article 7 link has a protocol typo) and display a clean featured logo press cloud.</td>
+                </tr>
+                <tr>
+                  <td><strong>Paid Program List</strong></td>
+                  <td><span class="badge badge-success">Exists</span></td>
+                  <td>3 paid challenge programs ($80 - $150 course challenges). Recommend custom landing pages and cleaner register workflows.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 3: Video & Podcast Management Analysis -->
+        <section id="video-podcast-mgmt">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7a2 2 0 0 0-2.45-1.45L16 7V5a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2l4.55 1.45A2 2 0 0 0 23 17V7z"/></svg>
+            3. Video &amp; Podcast Management Analysis
+          </h2>
+          <p>
+            Greg's extensive catalog (47+ media links, podcasts, and videos) is currently managed manually. To scale efficiently, the video ingestion model should be optimized to reduce day-to-day website updates.
+          </p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Approach</th>
+                  <th style="width: 25%;">How It Works</th>
+                  <th style="width: 15%;">Client Effort</th>
+                  <th style="width: 35%;">Pros &amp; Cons</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Manual Wix Embeds</strong></td>
+                  <td>Copy-paste YouTube embeds into Wix pages manually.</td>
+                  <td><span class="badge badge-danger">High</span></td>
+                  <td><strong>Pros:</strong> Straightforward. <br><strong>Cons:</strong> Highly tedious, easy to make alignment/link errors.</td>
+                </tr>
+                <tr>
+                  <td><strong>Automated Playlist Feed (Recommended)</strong></td>
+                  <td>The website automatically pulls new uploads from a specific YouTube Playlist ID.</td>
+                  <td><span class="badge badge-success">Very Low</span></td>
+                  <td><strong>Pros:</strong> Syncs instantly when you add a video to your YouTube playlist. <br><strong>Cons:</strong> Relies on YouTube API connectivity.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 4: Architecture Options Comparison -->
+        <section id="architecture-comparison">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            4. Redesign Approaches Comparison
+          </h2>
+          <p>
+            We compare the two strategic redesign pathways. <strong>Tip:</strong> The values inside the table are interactive. You can adjust the scores (0 to 10) directly to match your preferences, and the totals will update.
+          </p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 40%;">Comparison Criteria</th>
+                  <th style="width: 30%; text-align: center;">Wix Redesign<br><span style="font-size:0.75rem; opacity:0.8;">Approach 1</span></th>
+                  <th style="width: 30%; text-align: center;">Custom + Wix Headless (Next.js)<br><span style="font-size:0.75rem; opacity:0.8;">Approach 2</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Initial Cost</strong> (Higher score = cheaper)</td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="6.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Development Speed</strong></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="7.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Performance / Mobile Speed</strong></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="5.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>SEO &amp; Schema Control</strong></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="6.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Ease of Content Editing</strong></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Scalability</strong></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="5.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Video Management Automation</strong></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="6.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Long-Term Maintenance</strong> (Higher = easier)</td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Client Learning Curve</strong> (Higher = faster learning)</td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <tr>
+                  <td><strong>Developer Experience</strong></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="4.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
+                </tr>
+                <!-- Total Row calculated dynamically by JS -->
+                <tr>
+                  <td><strong>Total Score (100 Max)</strong></td>
+                  <td class="total-score-cell" style="text-align: center;">
+                    <div class="total-score-val" id="opt-1-total">--</div>
+                    <div class="score-bar"><div class="score-bar-fill" id="opt-1-progress-fill"></div></div>
+                  </td>
+                  <td class="total-score-cell" style="text-align: center;">
+                    <div class="total-score-val" id="opt-2-total">--</div>
+                    <div class="score-bar"><div class="score-bar-fill" id="opt-2-progress-fill"></div></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Section 5: Strategic Pathways -->
+        <section id="recommended-architectures">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            5. Strategic Pathways
+          </h2>
+          <p>
+            We have outlined two strategic pathways tailored to different development budgets and growth expectations.
+          </p>
+
+          <div class="rec-grid">
+            
+            <!-- Wix Redesign -->
+            <div class="rec-card rec-budget">
+              <div class="rec-header">
+                <div>
+                  <div class="rec-title">Approach 1: Wix Redesign</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem;">Managed Wix Builder</div>
+                </div>
+                <div class="rec-score-badge" id="opt-1-badge-score">--</div>
+              </div>
+              <div>
+                <p style="font-size: 0.85rem; margin-bottom: 0.75rem;">Re-styling elements, layout structures, and banners directly within Wix. Best for a quick visual refresh with low setup costs.</p>
+                <ul class="rec-bullets">
+                  <li>Lowest upfront setup cost</li>
+                  <li>Fast delivery and launch timeline</li>
+                  <li>Wix handles hosting, domain, and servers</li>
+                </ul>
+                <ul class="rec-bullets cons">
+                  <li>Sluggish mobile loading speeds</li>
+                  <li>Limited custom animation controls</li>
+                  <li>Manually managed video directories</li>
+                </ul>
+              </div>
+              <div class="rec-footer">
+                <div class="rec-usecase">Best Use Case</div>
+                <p style="font-size: 0.85rem; margin-top: 0.25rem; font-weight: 500; margin-bottom: 0;">Rapid visual update within the existing Wix framework.</p>
+              </div>
+            </div>
+
+            <!-- Custom + Wix Headless -->
+            <div class="rec-card rec-premium">
+              <div class="rec-header">
+                <div>
+                  <div class="rec-title">Approach 2: Custom + Wix Headless</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem;">Next.js Frontend + Wix Headless API</div>
+                </div>
+                <div class="rec-score-badge" id="opt-2-badge-score">--</div>
+              </div>
+              <div>
+                <p style="font-size: 0.85rem; margin-bottom: 0.75rem;">Separating the user frontend (Next.js) for premium performance and custom styling, while keeping the Wix Dashboard as the editor backend.</p>
+                <ul class="rec-bullets">
+                  <li>Sub-second page speeds &amp; perfect SEO schemas</li>
+                  <li>Client continues editing content via Wix Dashboard</li>
+                  <li>Automated YouTube integrations and filters</li>
+                </ul>
+                <ul class="rec-bullets cons">
+                  <li>Higher initial development setup cost</li>
+                  <li>Requires connecting frontend APIs to Wix</li>
+                </ul>
+              </div>
+              <div class="rec-footer">
+                <div class="rec-usecase">Best Use Case</div>
+                <p style="font-size: 0.85rem; margin-top: 0.25rem; font-weight: 500; margin-bottom: 0;">Thought leadership expansion demanding premium mobile speed, SEO authority, and custom animations.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Section 6: Client Discovery Questionnaire -->
+        <section id="discovery-questionnaire">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="10" y2="15"/><line x1="15" y1="15" x2="15" y2="15"/><line x1="9" y1="19" x2="10" y2="19"/><line x1="15" y1="19" x2="15" y2="19"/></svg>
+            6. Client Discovery Questionnaire
+          </h2>
+          <p>
+            Please complete this interactive form. When finished, click <strong>Send Responses to Evoltech</strong> at the bottom to submit your responses directly via email, or use the OneDrive link to upload files.
+          </p>
+
+          <form id="questionnaire-form">
+            
+            <!-- Section A: Access & Technical Details -->
+            <div class="questionnaire-group">
+              <div class="questionnaire-group-title">A. Access &amp; Technical Details</div>
+              <div class="table-container">
+                <table class="q-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 45%;">Discovery Question</th>
+                      <th style="width: 55%;">Client Response Input</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>1. Can you provide Wix Admin credentials or administrator invite access to develop the site?</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <textarea class="q-textarea q-input" data-section="Access &amp; Technical Details" data-question="1. Wix account access details" placeholder="e.g. Will send admin invite to support@evoltechgroup.com / credentials are..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>2. Do you have access to the domain and DNS settings?</strong> (e.g. GoDaddy, Namecheap, Wix, Network Solutions)</td>
+                      <td>
+                        <div class="q-field-container">
+                          <textarea class="q-textarea q-input" data-section="Access &amp; Technical Details" data-question="2. Domain &amp; DNS access" placeholder="e.g. Yes, domain registered at GoDaddy, login details are available..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Section B: Brand Assets & Media Uploads -->
+            <div class="questionnaire-group">
+              <div class="questionnaire-group-title">B. Brand Assets &amp; Shared Link Uploads</div>
+              
+              <div class="link-card">
+                <div class="link-icon-container">
+                  <svg style="width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24">
+                    <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+                    <line x1="12" y1="11" x2="12" y2="17"/>
+                    <polyline points="9 14 12 11 15 14"/>
+                  </svg>
+                </div>
+                <div style="flex-grow: 1;">
+                  <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">OneDrive Upload Folder</h4>
+                  <p style="font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                    Use the link below to upload all brand assets, logos, and professional photos directly to the project folder.
+                  </p>
+                  <a href="https://evoltechgroup-my.sharepoint.com/personal/tom_evoltechgroup_com/_layouts/15/onedrive.aspx?e=5%3A5d5c81b57b89442f9844e02d3f00310b&amp;sharingv2=true&amp;fromShare=true&amp;at=9&amp;CT=1781005574199&amp;OR=OWA-NT-Mail&amp;CID=6232ce24-5537-0f6f-9dce-ecff89f6f2f3&amp;SI=NonSentItems&amp;id=%2Fpersonal%2Ftom_evoltechgroup_com%2FDocuments%2FEVOLTECH%2FP+R+O+J+E+C+T+S%2FGreg+Sher&amp;FolderCTID=0x0120001DF0BBCE9B108548BE3E1AED9098CCBA&amp;view=0&amp;TeamsCID=372c0433-243a-4f12-84f8-fdf46281eebd" target="_blank" class="btn btn-outline" style="font-size: 0.75rem; padding: 0.35rem 0.75rem;">
+                    Open Shared Upload Folder
+                  </a>
+                </div>
+              </div>
+
+              <div class="table-container">
+                <table class="q-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 45%;">Discovery Question</th>
+                      <th style="width: 55%;">Client Response Input</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>3. Do you have brand guidelines, colors, or fonts we should follow?</strong> (If yes, specify details)</td>
+                      <td>
+                        <div class="q-field-container">
+                          <textarea class="q-textarea q-input" data-section="Brand Assets &amp; Shared Link Uploads" data-question="3. Brand guidelines details" placeholder="e.g. Font preference: Outfit, Colors: Navy, Cyan..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>4. Please upload all brand assets (logos, photos, event photos, media assets, etc.) to the shared folder.</strong><br>
+                        Include:
+                        <ul style="margin-left: 1.25rem; font-size: 0.8rem; margin-top: 0.25rem; color: var(--text-secondary);">
+                          <li>Primary &amp; Secondary Logos (SVG, PNG, JPG vector types)</li>
+                          <li>Favicon (if available)</li>
+                          <li>Professional photos, headshots, event photos, speaking photos</li>
+                        </ul>
+                      </td>
+                      <td>
+                        <div class="q-field-container">
+                          <select class="q-select q-input" data-section="Brand Assets &amp; Shared Link Uploads" data-question="4. Asset uploads status">
+                            <option value="" disabled selected>Select status...</option>
+                            <option value="All files uploaded to OneDrive">All files uploaded to OneDrive</option>
+                            <option value="Some files uploaded / remaining soon">Some files uploaded / remaining soon</option>
+                            <option value="Will upload later today">Will upload later today</option>
+                            <option value="Need help / will send via email">Need help / will send via email</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Section C: Website Content & Structure -->
+            <div class="questionnaire-group">
+              <div class="questionnaire-group-title">C. Website Content &amp; Structure</div>
+              <div class="table-container">
+                <table class="q-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 45%;">Discovery Question</th>
+                      <th style="width: 55%;">Client Response Input</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>5. Who will be tasked with updating the website content?</strong> (e.g. client, internal assistant, external agency)</td>
+                      <td>
+                        <div class="q-field-container">
+                          <input type="text" class="q-select q-input" data-section="Website Content &amp; Structure" data-question="5. Who will update content" placeholder="Name or Role...">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>6. Are there any new pages you would like to add?</strong> (e.g. Resources, Consulting, Course portal)</td>
+                      <td>
+                        <div class="q-field-container">
+                          <textarea class="q-textarea q-input" data-section="Website Content &amp; Structure" data-question="6. New pages to add" placeholder="e.g. Custom consultation landing page, course guide details..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Section D: Videos & Podcasts -->
+            <div class="questionnaire-group">
+              <div class="questionnaire-group-title">D. Videos &amp; Podcasts</div>
+              <div class="table-container">
+                <table class="q-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 45%;">Discovery Question</th>
+                      <th style="width: 55%;">Client Response Input</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>7. Are videos uploaded exclusively to YouTube?</strong> (e.g. or Vimeo, native files, etc.)</td>
+                      <td>
+                        <div class="q-field-container">
+                          <input type="text" class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="7. Video hosting platforms" placeholder="e.g. YouTube exclusively / Vimeo links...">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>8. Should new uploads appear on the website automatically?</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <select class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="8. Automatic YouTube sync">
+                            <option value="" disabled selected>Select preference...</option>
+                            <option value="Yes - Auto Channel Feed">Yes, sync channel uploads automatically</option>
+                            <option value="Yes - Curated Playlist Feed">Yes, sync curated YouTube playlist ID</option>
+                            <option value="No - Manual CMS inputs">No, prefer choosing videos manually inside CMS</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>9. Do you group your video content into structural playlists?</strong> (e.g. keynotes, podcasts, lessons)</td>
+                      <td>
+                        <div class="q-field-container">
+                          <select class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="9. Uses playlists">
+                            <option value="" disabled selected>Select status...</option>
+                            <option value="Yes">Yes, organized in YouTube playlists</option>
+                            <option value="No">No, basic upload feed only</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>10. Should users be able to search and filter through past podcast episodes?</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <select class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="10. Searchable podcast appearances">
+                            <option value="" disabled selected>Select option...</option>
+                            <option value="Yes - Keyword Search">Yes, keyword search and tags needed</option>
+                            <option value="No">No</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Section E: Contact, Forms & Integrations -->
+            <div class="questionnaire-group">
+              <div class="questionnaire-group-title">E. Contact, Forms &amp; Integrations</div>
+              <div class="table-container">
+                <table class="q-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 45%;">Discovery Question</th>
+                      <th style="width: 55%;">Client Response Input</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>11. Where should contact form submissions be sent? (e.g. specific emails or system) &amp; Is there any 3rd party integration done (e.g. emailjs, mailchimp, HubSpot)?</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <textarea class="q-textarea q-input" data-section="Contact, Forms &amp; Integrations" data-question="11. Form submissions routing &amp; 3rd party integrations" placeholder="e.g. Send to greg@gregsher.biz; currently using Mailchimp for newsletters..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>12. Do you need separate forms for speaking inquiries, media requests, or general contact?</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <select class="q-select q-input" data-section="Contact, Forms &amp; Integrations" data-question="12. Needs separate forms">
+                            <option value="" disabled selected>Select preference...</option>
+                            <option value="Yes - Separate forms">Yes, separate fields and routing for booking vs general</option>
+                            <option value="No - Unified form">No, single form with selection drop-down is fine</option>
+                          </select>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Submit Options -->
+            <div class="questionnaire-actions">
+              <button type="button" class="btn btn-outline" onclick="resetQuestionnaire()">Reset Fields</button>
+              <button type="button" class="btn btn-primary" onclick="sendQuestionnaire()">
+                <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; margin-right:8px;" viewBox="0 0 24 24">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+                Send Responses to Evoltech
+              </button>
+            </div>
+            
+          </form>
+        </section>
+
+        <!-- Section 7: Final Recommendation -->
+        <section id="final-recommendation">
+          <h2 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            7. Final Recommendation
+          </h2>
+          <p>
+            Our final recommendation details short-term targets, long-term options, and key maintenance comparisons of the two approaches.
+          </p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 25%;">Target Domain</th>
+                  <th style="width: 35%;">Recommended Configuration</th>
+                  <th style="width: 40%;">Rationale &amp; Integration Path</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Best Short-Term Solution</strong></td>
+                  <td><span class="badge badge-warning">Wix Redesign</span></td>
+                  <td>If rapid delivery is required, a Wix Redesign corrects initial visual limits immediately. Wix handles hosting setups natively.</td>
+                </tr>
+                <tr>
+                  <td><strong>Best Long-Term Solution</strong></td>
+                  <td><span class="badge badge-success">Custom + Wix Headless (CMS)</span></td>
+                  <td>Delivers sub-second speed performance and custom layouts while letting you manage content within the familiar Wix dashboard.</td>
+                </tr>
+                <tr>
+                  <td><strong>Lowest Maintenance Solution</strong></td>
+                  <td><span class="badge badge-info">Wix Redesign</span></td>
+                  <td>Wix functions as a managed service, handling software libraries, security updates, and hosting systems directly.</td>
+                </tr>
+                <tr>
+                  <td><strong>Most Scalable Solution</strong></td>
+                  <td><span class="badge badge-success">Custom + Wix Headless (CMS)</span></td>
+                  <td>Separates page views from content databases, letting you grow, animate, and scale media channels without Wix limits.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Bottom OneDrive upload link box -->
+          <div class="link-card" style="margin-top: 2.5rem; margin-bottom: 0;">
+            <div class="link-icon-container">
+              <svg style="width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2;" viewBox="0 0 24 24">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div style="flex-grow: 1;">
+              <h4 style="font-size: 0.95rem; margin-bottom: 0.25rem;">Final Assets Upload Checklist</h4>
+              <p style="font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                Please remember to share and upload all website assets, vector logos, photos, speaking videos, or media content directly into the shared folder:
+              </p>
+              <a href="https://evoltechgroup-my.sharepoint.com/personal/tom_evoltechgroup_com/_layouts/15/onedrive.aspx?e=5%3A5d5c81b57b89442f9844e02d3f00310b&amp;sharingv2=true&amp;fromShare=true&amp;at=9&amp;CT=1781005574199&amp;OR=OWA-NT-Mail&amp;CID=6232ce24-5537-0f6f-9dce-ecff89f6f2f3&amp;SI=NonSentItems&amp;id=%2Fpersonal%2Ftom_evoltechgroup_com%2FDocuments%2FEVOLTECH%2FP+R+O+J+E+C+T+S%2FGreg+Sher&amp;FolderCTID=0x0120001DF0BBCE9B108548BE3E1AED9098CCBA&amp;view=0&amp;TeamsCID=372c0433-243a-4f12-84f8-fdf46281eebd" target="_blank" style="color: var(--accent); font-weight: 600; text-decoration: none; font-size: 0.875rem;">
+                https://evoltechgroup-my.sharepoint.com/personal/tom_evoltechgroup_com/.../Greg Sher/ &rarr;
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Theme Toggle Functionality
+    function toggleTheme() {
+      const htmlEl = document.documentElement;
+      const themeToggleTxt = document.getElementById('theme-toggle-txt');
+      const themeIcon = document.getElementById('theme-icon');
+      const currentTheme = htmlEl.getAttribute('data-theme');
+      
+      if (currentTheme === 'light') {
+        htmlEl.setAttribute('data-theme', 'dark');
+        themeToggleTxt.innerText = 'Light Mode';
+        // Change to Sun Icon
+        themeIcon.innerHTML = `
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        `;
+      } else {
+        htmlEl.setAttribute('data-theme', 'light');
+        themeToggleTxt.innerText = 'Dark Mode';
+        // Change to Moon Icon
+        themeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+      }
+    }
+
+    // Dynamic Scores Calculation Matrix for 2 Options
+    function updateScores() {
+      const optionsCount = 2;
+      for (let opt = 1; opt <= optionsCount; opt++) {
+        const inputs = document.querySelectorAll(`.opt-${opt}-score`);
+        let total = 0;
+        inputs.forEach(input => {
+          let val = parseFloat(input.value);
+          if (isNaN(val)) val = 0;
+          if (val < 0) {
+            val = 0;
+            input.value = "0";
+          }
+          if (val > 10) {
+            val = 10;
+            input.value = "10";
+          }
+          total += val;
+        });
+        
+        // Scale sum to 100 max
+        let scoreOutOf100 = total * 10; // Since there are 10 criteria
+        
+        // Update total values in table cell
+        const totalCell = document.getElementById(`opt-${opt}-total`);
+        if (totalCell) {
+          totalCell.innerText = scoreOutOf100.toFixed(1) + '/100';
+        }
+        
+        // Update visual rating progress bars
+        const progressFill = document.getElementById(`opt-${opt}-progress-fill`);
+        if (progressFill) {
+          progressFill.style.width = scoreOutOf100 + '%';
+        }
+
+        // Update indicators in Recommendation Section 5
+        const scoreBadge = document.getElementById(`opt-${opt}-badge-score`);
+        if (scoreBadge) {
+          scoreBadge.innerText = (scoreOutOf100 / 10).toFixed(1) + '/10';
+        }
+      }
+    }
+
+    // Initial scores setup on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      updateScores();
+      
+      // Auto active link highlight on scrolling
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (window.pageYOffset >= (sectionTop - 150)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+          }
+        });
+      });
+    });
+
+    // Reset Discovery Questionnaire responses
+    function resetQuestionnaire() {
+      if (confirm("Are you sure you want to clear all questionnaire responses?")) {
+        const inputs = document.querySelectorAll('.q-input');
+        inputs.forEach(input => {
+          input.value = '';
+        });
+      }
+    }
+
+    // Compile answers and export to local backup text file
+    function getCompiledAnswersText() {
+      const inputs = document.querySelectorAll('.q-input');
+      let textContent = `========================================================\n`;
+      textContent += `GREG SHER BRAND EXPERIENCE - WEBSITE REDESIGN RESPONSES\n`;
+      textContent += `Completed on: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}\n`;
+      textContent += `Target URL: https://www.gregsher.biz/\n`;
+      textContent += `========================================================\n\n`;
+
+      let currentSection = '';
+      
+      inputs.forEach(input => {
+        const section = input.getAttribute('data-section') || 'General';
+        const question = input.getAttribute('data-question') || 'Question';
+        let value = '';
+        
+        if (input.tagName === 'SELECT') {
+          value = input.options[input.selectedIndex].text;
+        } else {
+          value = input.value.trim();
+        }
+        
+        if (!value) value = '[No Response Provided]';
+
+        if (section !== currentSection) {
+          currentSection = section;
+          textContent += `\n--------------------------------------------------------\n`;
+          textContent += `${currentSection.toUpperCase()}\n`;
+          textContent += `--------------------------------------------------------\n`;
+        }
+
+        textContent += `Q: ${question}\nA: ${value}\n\n`;
+      });
+      return textContent;
+    }
+
+    // Direct email submission function
+    function sendQuestionnaire() {
+      const textContent = getCompiledAnswersText();
+      const subject = "Greg Sher Website Discovery Responses";
+      const mailtoUrl = `mailto:tom@evoltechgroup.com,priyanka@evoltechgroup.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(textContent)}`;
+      
+      // Open default email client
+      window.location.href = mailtoUrl;
+      
+      toast("Opening your default mail client to submit answers directly to Evoltech. Please review and click 'Send' in your email application.");
+    }
+
+    // Dynamic toast notification function
+    function toast(message, duration = 6000) {
+      let toastEl = document.getElementById('toast-popup');
+      if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.id = 'toast-popup';
+        toastEl.className = 'toast-container';
+        toastEl.innerHTML = `
+          <svg style="width: 20px; height: 20px; fill: none; stroke: var(--accent); stroke-width: 2; flex-shrink: 0;" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+          </svg>
+          <span id="toast-message" style="font-size: 0.875rem; font-weight: 500;"></span>
+        `;
+        document.body.appendChild(toastEl);
+      }
+      
+      const toastMsgEl = document.getElementById('toast-message');
+      toastMsgEl.innerText = message;
+      
+      // Force layout reflow
+      toastEl.offsetHeight;
+      
+      toastEl.classList.add('show');
+      
+      setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, duration);
+    }
+  </script>
+
+</body>
+</html>
