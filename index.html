@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Client Discovery &amp; Website Redesign — Greg Sher Brand Experience</title>
+  <title>EvolTech &amp; Website Redesign — Greg Sher Brand Experience</title>
   <meta name="description" content="Website audit, platform redesign options, and interactive discovery questionnaire for gregsher.biz.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 32' fill='none'%3E%3Cpath d='M0.801 21.3512C0.801 21.0631 0.925 20.7891 1.142 20.5992L22.98 1.45457C23.626 0.887909 24.639 1.34692 24.639 2.20653V10.6488C24.639 10.9369 24.515 11.2109 24.298 11.4008L2.46 30.5454C1.814 31.1121 0.801 30.6531 0.801 29.7935V21.3512Z' fill='%238DCAFF'/%3E%3Cpath d='M16.07 21.3512C16.07 21.0631 16.195 20.7891 16.411 20.5992L38.249 1.45457C38.896 0.887909 39.908 1.34692 39.908 2.20653V10.6488C39.908 10.9369 39.784 11.2109 39.568 11.4008L17.73 30.5454C17.083 31.1121 16.07 30.6531 16.07 29.7935V21.3512Z' fill='%234C96D7'/%3E%3Cpath d='M31.33 21.3512C31.33 21.0631 31.454 20.7891 31.671 20.5992L53.509 1.45457C54.155 0.887909 55.168 1.34692 55.168 2.20653V10.6488C55.168 10.9369 55.044 11.2109 54.827 11.4008L32.989 30.5454C32.343 31.1121 31.33 30.6531 31.33 29.7935V21.3512Z' fill='%231761A0'/%3E%3C/svg%3E">
   
+  <!-- html2pdf.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -775,29 +779,35 @@
     /* Toast Notification styles */
     .toast-container {
       position: fixed;
-      bottom: 2rem;
-      right: 2rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.9);
       background-color: var(--bg-secondary);
       color: var(--text-primary);
-      padding: 1rem 1.5rem;
+      padding: 1.5rem 2.25rem;
       border-radius: var(--radius-md);
       box-shadow: var(--shadow-lg);
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1.25rem;
       z-index: 1000;
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       pointer-events: none;
       border: 1px solid var(--border-color);
-      max-width: 380px;
+      max-width: 500px;
+      width: calc(100% - 4rem);
     }
 
     .toast-container.show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(-50%, -50%) scale(1);
       pointer-events: auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -846,12 +856,7 @@
             Video Management
           </a>
         </li>
-        <li>
-          <a href="#architecture-comparison">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-            Redesign Approaches
-          </a>
-        </li>
+        
         <li>
           <a href="#recommended-architectures">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -873,7 +878,7 @@
       </ul>
 
       <div style="font-size: 0.75rem; color: var(--text-secondary); text-align: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
-        Partnered with <strong>Evoltech</strong>
+        Prepared by <strong>EvolTech <svg width="21" height="12" viewBox="140 0 56 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-left: 2px;"><path d="M140.801 21.3512C140.801 21.0631 140.925 20.7891 141.142 20.5992L162.98 1.45457C163.626 0.887909 164.639 1.34692 164.639 2.20653V10.6488C164.639 10.9369 164.515 11.2109 164.298 11.4008L142.46 30.5454C141.814 31.1121 140.801 30.6531 140.801 29.7935V21.3512Z" fill="#8DCAFF"/><path d="M156.07 21.3512C156.07 21.0631 156.195 20.7891 156.411 20.5992L178.249 1.45457C178.896 0.887909 179.908 1.34692 179.908 2.20653V10.6488C179.908 10.9369 179.784 11.2109 179.568 11.4008L157.73 30.5454C157.083 31.1121 156.07 30.6531 156.07 29.7935V21.3512Z" fill="#4C96D7"/><path d="M171.33 21.3512C171.33 21.0631 171.454 20.7891 171.671 20.5992L193.509 1.45457C194.155 0.887909 195.168 1.34692 195.168 2.20653V10.6488C195.168 10.9369 195.044 11.2109 194.827 11.4008L172.989 30.5454C172.343 31.1121 171.33 30.6531 171.33 29.7935V21.3512Z" fill="#1761A0"/></svg></strong>
       </div>
     </aside>
 
@@ -893,13 +898,11 @@
             </svg>
             <span id="theme-toggle-txt" style="margin-left: 8px;">Dark Mode</span>
           </button>
-          <button class="btn btn-primary" onclick="window.print()">
+          <button class="btn btn-primary" onclick="downloadCompleteReportPDF()" title="Download assessment report as PDF">
             <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; margin-right:8px;" viewBox="0 0 24 24">
-              <polyline points="6 9 6 2 18 2 18 9"/>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-              <rect x="6" y="14" width="12" height="8"/>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
             </svg>
-            Print / Save PDF
+            Download PDF
           </button>
         </div>
       </header>
@@ -908,7 +911,7 @@
       <main>
         <div class="brand-section" style="border-bottom: 1px solid var(--border-color); padding-bottom: 2rem; margin-bottom: 3rem;">
           <h1>Discovery &amp; Redesign Assessment</h1>
-          <p class="subtitle" style="margin-bottom: 0.5rem;">Strategic Platform Redesign Options for Greg Sher</p>
+          <p class="subtitle" style="margin-bottom: 0.5rem;">Strategic Platform Redesign for Greg Sher</p>
           <div style="display: flex; gap: 2rem; font-size: 0.8rem; color: var(--text-secondary);">
             <div><strong>Client Site:</strong> <a href="https://www.gregsher.biz/" target="_blank" style="color: var(--accent); text-decoration: none;">gregsher.biz</a></div>
             <div><strong>Redesign Partner:</strong> Evoltech Group</div>
@@ -923,7 +926,9 @@
             1. Website Analysis
           </h2>
           <p>
-            An assessment of the current <strong>gregsher.biz</strong> website. Built on Wix, the platform represents Greg Sher's professional brand, thought leadership, speaking events, and consulting. Our audit of the site identified 24 speaking/keynote videos, 11 "One on One" interview videos, 12 guest podcast appearances, 13 news publications, and 3 paid training challenges.
+            An assessment of the current <strong>gregsher.biz</strong> 
+serves as the central hub for Greg Sher's professional brand, thought leadership, and training courses. Rather than a standard marketing site, it functions as a growing content library. Our audit identified approximately 27 speaking videos, 100+ "One on One" interviews, 15 podcast appearances, 14 news features, and 3 training challenges.
+
           </p>
           
           <div class="table-container">
@@ -948,7 +953,7 @@
                 </tr>
                 <tr>
                   <td><strong>Media &amp; Feed Strategy</strong></td>
-                  <td>Curated directories of WBAL history, WNFMTV, and 35+ YouTube embeds updated manually.</td>
+                  <td>100+ YouTube embeds updated manually.</td>
                   <td>Automate YouTube feed integration to keep video pages fresh with zero client effort.</td>
                 </tr>
                 <tr>
@@ -984,7 +989,7 @@
                 <tr>
                   <td><strong>Home Page</strong></td>
                   <td><span class="badge badge-success">Exists</span></td>
-                  <td>Prominently features bio timeline links, book publications, and WNFMTV/ALLOFUS initiatives. Recommend cleaner layouts and high-speed asset optimization.</td>
+                  <td>Prominently features bio timeline links, book publications, and #ALLOFUS initiatives. Recommend cleaner layouts and high-speed asset optimization.</td>
                 </tr>
                 <tr>
                   <td><strong>About Page</strong></td>
@@ -994,7 +999,7 @@
                 <tr>
                   <td><strong>Videos &amp; Interviews</strong></td>
                   <td><span class="badge badge-success">Exists</span></td>
-                  <td>Splits into 27 keynote/speaking videos and 30+ "One on One" interview videos. We recommend unified tagging and search functionality.</td>
+                  <td>Splits into 27 keynote/speaking videos and 100+ "One on One" interview videos. We recommend unified tagging and search functionality.</td>
                 </tr>
                 <tr>
                   <td><strong>Podcasts Page</strong></td>
@@ -1055,97 +1060,13 @@
         </section>
 
         <!-- Section 4: Architecture Options Comparison -->
-        <section id="architecture-comparison">
-          <h2 class="section-title">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-            4. Redesign Approaches Comparison
-          </h2>
-          <p>
-            We compare the two strategic redesign pathways. <strong>Tip:</strong> The values inside the table are interactive. You can adjust the scores (0 to 10) directly to match your preferences, and the totals will update.
-          </p>
-
-          <div class="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th style="width: 40%;">Comparison Criteria</th>
-                  <th style="width: 30%; text-align: center;">Wix Redesign<br><span style="font-size:0.75rem; opacity:0.8;">Approach 1</span></th>
-                  <th style="width: 30%; text-align: center;">Custom + Wix Headless (Next.js)<br><span style="font-size:0.75rem; opacity:0.8;">Approach 2</span></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Initial Cost</strong> (Higher score = cheaper)</td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="6.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Development Speed</strong></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="7.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Performance / Mobile Speed</strong></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="5.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>SEO &amp; Schema Control</strong></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="6.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Ease of Content Editing</strong></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Scalability</strong></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="5.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Video Management Automation</strong></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="6.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Long-Term Maintenance</strong> (Higher = easier)</td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Client Learning Curve</strong> (Higher = faster learning)</td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="9.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="9.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <tr>
-                  <td><strong>Developer Experience</strong></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-1-score" value="4.0" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                  <td style="text-align: center;"><input type="number" class="score-input opt-2-score" value="8.5" min="0" max="10" step="0.5" oninput="updateScores()"></td>
-                </tr>
-                <!-- Total Row calculated dynamically by JS -->
-                <tr>
-                  <td><strong>Total Score (100 Max)</strong></td>
-                  <td class="total-score-cell" style="text-align: center;">
-                    <div class="total-score-val" id="opt-1-total">--</div>
-                    <div class="score-bar"><div class="score-bar-fill" id="opt-1-progress-fill"></div></div>
-                  </td>
-                  <td class="total-score-cell" style="text-align: center;">
-                    <div class="total-score-val" id="opt-2-total">--</div>
-                    <div class="score-bar"><div class="score-bar-fill" id="opt-2-progress-fill"></div></div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
+       
 
         <!-- Section 5: Strategic Pathways -->
         <section id="recommended-architectures">
           <h2 class="section-title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            5. Strategic Pathways
+            4. Strategic Pathways
           </h2>
           <p>
             We have outlined two strategic pathways tailored to different development budgets and growth expectations.
@@ -1182,31 +1103,7 @@
             </div>
 
             <!-- Custom + Wix Headless -->
-            <div class="rec-card rec-premium">
-              <div class="rec-header">
-                <div>
-                  <div class="rec-title">Approach 2: Custom + Wix Headless</div>
-                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem;">Next.js Frontend + Wix Headless API</div>
-                </div>
-                <div class="rec-score-badge" id="opt-2-badge-score">--</div>
-              </div>
-              <div>
-                <p style="font-size: 0.85rem; margin-bottom: 0.75rem;">Separating the user frontend (Next.js) for premium performance and custom styling, while keeping the Wix Dashboard as the editor backend.</p>
-                <ul class="rec-bullets">
-                  <li>Sub-second page speeds &amp; perfect SEO schemas</li>
-                  <li>Client continues editing content via Wix Dashboard</li>
-                  <li>Automated YouTube integrations and filters</li>
-                </ul>
-                <ul class="rec-bullets cons">
-                  <li>Higher initial development setup cost</li>
-                  <li>Requires connecting frontend APIs to Wix</li>
-                </ul>
-              </div>
-              <div class="rec-footer">
-                <div class="rec-usecase">Best Use Case</div>
-                <p style="font-size: 0.85rem; margin-top: 0.25rem; font-weight: 500; margin-bottom: 0;">Thought leadership expansion demanding premium mobile speed, SEO authority, and custom animations.</p>
-              </div>
-            </div>
+            
 
           </div>
         </section>
@@ -1215,7 +1112,7 @@
         <section id="discovery-questionnaire">
           <h2 class="section-title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="10" y2="15"/><line x1="15" y1="15" x2="15" y2="15"/><line x1="9" y1="19" x2="10" y2="19"/><line x1="15" y1="19" x2="15" y2="19"/></svg>
-            6. Client Discovery Questionnaire
+            5. Client Discovery Questionnaire
           </h2>
           <p>
             Please complete this interactive form. When finished, click <strong>Send Responses to Evoltech</strong> at the bottom to submit your responses directly via email, or use the OneDrive link to upload files.
@@ -1248,6 +1145,29 @@
                       <td>
                         <div class="q-field-container">
                           <textarea class="q-textarea q-input" data-section="Access &amp; Technical Details" data-question="2. Domain &amp; DNS access" placeholder="e.g. Yes, domain registered at GoDaddy, login details are available..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                     <tr>
+                      <td><strong>3. Do you have an existing Google Analytics / Google Search Console account, or specific SEO keywords we should prioritize? If yes, please provide details and any login credentials.</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <textarea class="q-textarea q-input" data-section="Contact, Forms &amp; Integrations" data-question="13. SEO &amp; Google Analytics details/credentials" placeholder="e.g. Google Analytics Measurement ID: G-XXXXXX, or login credentials, target SEO keywords..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>4. Do we need to integrate social media links on the website?</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <select class="q-select q-input" id="q-socials-select" data-section="Contact, Forms &amp; Integrations" data-question="14. Needs social media integration" onchange="toggleSocialsInput()">
+                            <option value="" disabled selected>Select preference...</option>
+                            <option value="Yes">Yes, include social media links</option>
+                            <option value="No">No, not needed</option>
+                          </select>
+                          <div id="socials-input-container" style="display: none; margin-top: 0.75rem;">
+                            <textarea class="q-textarea q-input" data-section="Contact, Forms &amp; Integrations" data-question="14a. Social media links" placeholder="Please paste your social media links here (e.g. LinkedIn, YouTube, X/Twitter, Instagram)..."></textarea>
+                          </div>
                         </div>
                       </td>
                     </tr>
@@ -1289,7 +1209,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>3. Do you have brand guidelines, colors, or fonts we should follow?</strong> (If yes, specify details)</td>
+                      <td><strong>5. Do you have brand guidelines, colors, or fonts we should follow?</strong> (If yes, specify details)</td>
                       <td>
                         <div class="q-field-container">
                           <textarea class="q-textarea q-input" data-section="Brand Assets &amp; Shared Link Uploads" data-question="3. Brand guidelines details" placeholder="e.g. Font preference: Outfit, Colors: Navy, Cyan..."></textarea>
@@ -1298,7 +1218,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <strong>4. Please upload all brand assets (logos, photos, event photos, media assets, etc.) to the shared folder.</strong><br>
+                        <strong>6. Please upload all brand assets (logos, photos, event photos, media assets, etc.) to the shared folder.</strong><br>
                         Include:
                         <ul style="margin-left: 1.25rem; font-size: 0.8rem; margin-top: 0.25rem; color: var(--text-secondary);">
                           <li>Primary &amp; Secondary Logos (SVG, PNG, JPG vector types)</li>
@@ -1306,7 +1226,7 @@
                           <li>Professional photos, headshots, event photos, speaking photos</li>
                         </ul>
                       </td>
-                      <td>
+                      <!-- <td>
                         <div class="q-field-container">
                           <select class="q-select q-input" data-section="Brand Assets &amp; Shared Link Uploads" data-question="4. Asset uploads status">
                             <option value="" disabled selected>Select status...</option>
@@ -1316,7 +1236,7 @@
                             <option value="Need help / will send via email">Need help / will send via email</option>
                           </select>
                         </div>
-                      </td>
+                      </td> -->
                     </tr>
                   </tbody>
                 </table>
@@ -1336,7 +1256,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>5. Who will be tasked with updating the website content?</strong> (e.g. client, internal assistant, external agency)</td>
+                      <td><strong>7. Who will be tasked with updating the website content?</strong> (e.g. client, internal assistant, external agency)</td>
                       <td>
                         <div class="q-field-container">
                           <input type="text" class="q-select q-input" data-section="Website Content &amp; Structure" data-question="5. Who will update content" placeholder="Name or Role...">
@@ -1344,10 +1264,10 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><strong>6. Are there any new pages you would like to add?</strong> (e.g. Resources, Consulting, Course portal)</td>
+                      <td><strong>8. Are there any new pages you would like to add?</strong> (e.g. Resources, Consulting, Course portal)</td>
                       <td>
                         <div class="q-field-container">
-                          <textarea class="q-textarea q-input" data-section="Website Content &amp; Structure" data-question="6. New pages to add" placeholder="e.g. Custom consultation landing page, course guide details..."></textarea>
+                          <textarea class="q-textarea q-input" data-section="Website Content &amp; Structure" data-question="6. New pages to add" placeholder="e.g. Vangard Advisory LOC, Custom consultation landing page, course guide details..."></textarea>
                         </div>
                       </td>
                     </tr>
@@ -1369,7 +1289,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>7. Are videos uploaded exclusively to YouTube?</strong> (e.g. or Vimeo, native files, etc.)</td>
+                      <td><strong>9. Are videos uploaded exclusively to YouTube?</strong> (e.g. or Vimeo, native files, etc.)</td>
                       <td>
                         <div class="q-field-container">
                           <input type="text" class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="7. Video hosting platforms" placeholder="e.g. YouTube exclusively / Vimeo links...">
@@ -1377,7 +1297,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><strong>8. Should new uploads appear on the website automatically?</strong></td>
+                      <td><strong>10. Should new uploads appear on the website automatically?</strong></td>
                       <td>
                         <div class="q-field-container">
                           <select class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="8. Automatic YouTube sync">
@@ -1390,7 +1310,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><strong>9. Do you group your video content into structural playlists?</strong> (e.g. keynotes, podcasts, lessons)</td>
+                      <td><strong>11. Do you group your video content into structural playlists?</strong> (e.g. keynotes, podcasts, lessons)</td>
                       <td>
                         <div class="q-field-container">
                           <select class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="9. Uses playlists">
@@ -1402,7 +1322,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><strong>10. Should users be able to search and filter through past podcast episodes?</strong></td>
+                      <td><strong>12. Should users be able to search and filter through past podcast episodes?</strong></td>
                       <td>
                         <div class="q-field-container">
                           <select class="q-select q-input" data-section="Videos &amp; Podcasts" data-question="10. Searchable podcast appearances">
@@ -1418,9 +1338,9 @@
               </div>
             </div>
 
-            <!-- Section E: Contact, Forms & Integrations -->
+            <!-- Section E: Contact, Forms, SEO & Integrations -->
             <div class="questionnaire-group">
-              <div class="questionnaire-group-title">E. Contact, Forms &amp; Integrations</div>
+              <div class="questionnaire-group-title">E. Contact, Forms, SEO &amp; Integrations</div>
               <div class="table-container">
                 <table class="q-table">
                   <thead>
@@ -1431,7 +1351,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>11. Where should contact form submissions be sent? (e.g. specific emails or system) &amp; Is there any 3rd party integration done (e.g. emailjs, mailchimp, HubSpot)?</strong></td>
+                      <td><strong>13. Where should contact form submissions be sent? (e.g. specific emails or system) &amp; Is there any 3rd party integration done (e.g. emailjs, mailchimp, HubSpot)?</strong></td>
                       <td>
                         <div class="q-field-container">
                           <textarea class="q-textarea q-input" data-section="Contact, Forms &amp; Integrations" data-question="11. Form submissions routing &amp; 3rd party integrations" placeholder="e.g. Send to greg@gregsher.biz; currently using Mailchimp for newsletters..."></textarea>
@@ -1439,7 +1359,7 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><strong>12. Do you need separate forms for speaking inquiries, media requests, or general contact?</strong></td>
+                      <td><strong>14. Do you need separate forms for speaking inquiries, media requests, or general contact?</strong></td>
                       <td>
                         <div class="q-field-container">
                           <select class="q-select q-input" data-section="Contact, Forms &amp; Integrations" data-question="12. Needs separate forms">
@@ -1450,21 +1370,97 @@
                         </div>
                       </td>
                     </tr>
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="questionnaire-group">
+              <div class="questionnaire-group-title">F. Metrics &amp; Social Proof</div>
+              <p style="font-size: 0.85rem; margin-bottom: 0.75rem; color: var(--text-secondary);">
+                <strong> Are there any statistics or achievements you'd like highlighted on the website?</strong> Please enter target figures or details for any applicable metric below.
+              </p>
+              <div class="table-container">
+                <table class="q-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 45%;">Stat / Achievement Category</th>
+                      <th style="width: 55%;">Target Numbers or Details (e.g. "5,000+", "25 Years")</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>YouTube Subscribers</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <input type="text" class="q-select q-input" data-section="Metrics &amp; Social Proof" data-question="15a. YouTube Subscribers" placeholder="e.g. 1,200+ or Leave blank to hide">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Podcast Episodes</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <input type="text" class="q-select q-input" data-section="Metrics &amp; Social Proof" data-question="15b. Podcast Episodes" placeholder="e.g. 12+ appearances or 150+ custom feed">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Years of Experience</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <input type="text" class="q-select q-input" data-section="Metrics &amp; Social Proof" data-question="15c. Years of Experience" placeholder="e.g. 25+ Years">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Speaking Engagements</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <input type="text" class="q-select q-input" data-section="Metrics &amp; Social Proof" data-question="15d. Speaking Engagements" placeholder="e.g. 100+ national conferences">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Companies Advised</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <input type="text" class="q-select q-input" data-section="Metrics &amp; Social Proof" data-question="15e. Companies Advised" placeholder="e.g. 50+ corporate advisory boards">
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>Awards or Recognition</strong></td>
+                      <td>
+                        <div class="q-field-container">
+                          <textarea class="q-textarea q-input" data-section="Metrics &amp; Social Proof" data-question="15f. Awards &amp; Recognition details" placeholder="List key awards or achievements..."></textarea>
+                        </div>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
             </div>
 
             <!-- Submit Options -->
-            <div class="questionnaire-actions">
-              <button type="button" class="btn btn-outline" onclick="resetQuestionnaire()">Reset Fields</button>
-              <button type="button" class="btn btn-primary" onclick="sendQuestionnaire()">
-                <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; margin-right:8px;" viewBox="0 0 24 24">
-                  <line x1="22" y1="2" x2="11" y2="13"/>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            <div class="questionnaire-actions" style="display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem;">
+              <div style="display: flex; gap: 1rem; width: 100%; justify-content: flex-end;">
+                <button type="button" class="btn btn-outline" onclick="resetQuestionnaire()">Reset Fields</button>
+               
+                <button type="button" class="btn btn-primary" onclick="sendQuestionnaire()">
+                  <svg style="width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2; margin-right:8px;" viewBox="0 0 24 24">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                  </svg>
+                  Send Responses to Evoltech
+                </button>
+              </div>
+              <span style="font-size: 0.8rem; color: var(--text-secondary); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; margin-top: 0.25rem;">
+                <svg style="width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; flex-shrink: 0;" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
                 </svg>
-                Send Responses to Evoltech
-              </button>
+                Please attach the PDF to the mail.
+              </span>
             </div>
             
           </form>
@@ -1474,10 +1470,10 @@
         <section id="final-recommendation">
           <h2 class="section-title">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            7. Final Recommendation
+            6. Final Recommendation
           </h2>
           <p>
-            Our final recommendation details short-term targets, long-term options, and key maintenance comparisons of the two approaches.
+            Our final recommendation details, the best possible solution for your website.
           </p>
 
           <div class="table-container">
@@ -1491,25 +1487,12 @@
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Best Short-Term Solution</strong></td>
+                  <td><strong>Best Solution</strong></td>
                   <td><span class="badge badge-warning">Wix Redesign</span></td>
                   <td>If rapid delivery is required, a Wix Redesign corrects initial visual limits immediately. Wix handles hosting setups natively.</td>
                 </tr>
-                <tr>
-                  <td><strong>Best Long-Term Solution</strong></td>
-                  <td><span class="badge badge-success">Custom + Wix Headless (CMS)</span></td>
-                  <td>Delivers sub-second speed performance and custom layouts while letting you manage content within the familiar Wix dashboard.</td>
-                </tr>
-                <tr>
-                  <td><strong>Lowest Maintenance Solution</strong></td>
-                  <td><span class="badge badge-info">Wix Redesign</span></td>
-                  <td>Wix functions as a managed service, handling software libraries, security updates, and hosting systems directly.</td>
-                </tr>
-                <tr>
-                  <td><strong>Most Scalable Solution</strong></td>
-                  <td><span class="badge badge-success">Custom + Wix Headless (CMS)</span></td>
-                  <td>Separates page views from content databases, letting you grow, animate, and scale media channels without Wix limits.</td>
-                </tr>
+                
+                
               </tbody>
             </table>
           </div>
@@ -1590,7 +1573,7 @@
         });
         
         // Scale sum to 100 max
-        let scoreOutOf100 = total * 10; // Since there are 10 criteria
+        let scoreOutOf100 = total; // Since there are 10 criteria, max score is 10 each, sum is out of 100
         
         // Update total values in table cell
         const totalCell = document.getElementById(`opt-${opt}-total`);
@@ -1638,6 +1621,19 @@
       });
     });
 
+    // Toggle visibility of socials input container based on selection
+    function toggleSocialsInput() {
+      const select = document.getElementById('q-socials-select');
+      const container = document.getElementById('socials-input-container');
+      if (select && container) {
+        if (select.value === 'Yes') {
+          container.style.display = 'block';
+        } else {
+          container.style.display = 'none';
+        }
+      }
+    }
+
     // Reset Discovery Questionnaire responses
     function resetQuestionnaire() {
       if (confirm("Are you sure you want to clear all questionnaire responses?")) {
@@ -1645,6 +1641,10 @@
         inputs.forEach(input => {
           input.value = '';
         });
+        const container = document.getElementById('socials-input-container');
+        if (container) {
+          container.style.display = 'none';
+        }
       }
     }
 
@@ -1660,6 +1660,10 @@
       let currentSection = '';
       
       inputs.forEach(input => {
+        // Skip elements that are not currently displayed (hidden/toggled off)
+        if (input.offsetParent === null) {
+          return;
+        }
         const section = input.getAttribute('data-section') || 'General';
         const question = input.getAttribute('data-question') || 'Question';
         let value = '';
@@ -1686,6 +1690,10 @@
 
     // Direct email submission function
     function sendQuestionnaire() {
+      // Automatically download responses PDF first
+      downloadQuestionnairePDF();
+
+      // Compile answers and open email
       const textContent = getCompiledAnswersText();
       const subject = "Greg Sher Website Discovery Responses";
       const mailtoUrl = `mailto:tom@evoltechgroup.com,priyanka@evoltechgroup.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(textContent)}`;
@@ -1693,24 +1701,26 @@
       // Open default email client
       window.location.href = mailtoUrl;
       
-      toast("Opening your default mail client to submit answers directly to Evoltech. Please review and click 'Send' in your email application.");
+      toast("Opening your default mail client to submit answers directly to Evoltech.\n\nPlease attach the downloaded PDF to the mail.");
     }
 
     // Dynamic toast notification function
+    let toastTimeout = null;
     function toast(message, duration = 6000) {
+      if (toastTimeout) clearTimeout(toastTimeout);
       let toastEl = document.getElementById('toast-popup');
       if (!toastEl) {
         toastEl = document.createElement('div');
         toastEl.id = 'toast-popup';
         toastEl.className = 'toast-container';
-        toastEl.innerHTML = `
-          <svg style="width: 20px; height: 20px; fill: none; stroke: var(--accent); stroke-width: 2; flex-shrink: 0;" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
-          </svg>
-          <span id="toast-message" style="font-size: 0.875rem; font-weight: 500;"></span>
-        `;
         document.body.appendChild(toastEl);
       }
+      toastEl.innerHTML = `
+        <svg style="width: 28px; height: 28px; fill: none; stroke: var(--accent); stroke-width: 2.5; flex-shrink: 0;" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>
+        </svg>
+        <span id="toast-message" style="font-size: 1.05rem; font-weight: 500; line-height: 1.5; margin-left: 8px;"></span>
+      `;
       
       const toastMsgEl = document.getElementById('toast-message');
       toastMsgEl.innerText = message;
@@ -1720,9 +1730,387 @@
       
       toastEl.classList.add('show');
       
-      setTimeout(() => {
+      toastTimeout = setTimeout(() => {
         toastEl.classList.remove('show');
       }, duration);
+    }
+
+    // Premium loading toast
+    function showProgressToast(message) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      let toastEl = document.getElementById('toast-popup');
+      if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.id = 'toast-popup';
+        toastEl.className = 'toast-container';
+        document.body.appendChild(toastEl);
+      }
+      toastEl.innerHTML = `
+        <div class="pdf-spinner" style="width: 24px; height: 24px; border: 3px solid var(--border-color); border-top: 3px solid var(--accent); border-radius: 50%; animation: spin 1s linear infinite; flex-shrink: 0;"></div>
+        <span id="toast-message" style="font-size: 1.05rem; font-weight: 500; line-height: 1.5; margin-left: 12px;">${message}</span>
+      `;
+      toastEl.offsetHeight;
+      toastEl.classList.add('show');
+    }
+
+    // Premium success toast
+    function showSuccessToast(message) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      let toastEl = document.getElementById('toast-popup');
+      if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.id = 'toast-popup';
+        toastEl.className = 'toast-container';
+        document.body.appendChild(toastEl);
+      }
+      toastEl.innerHTML = `
+        <svg style="width: 28px; height: 28px; fill: none; stroke: var(--success); stroke-width: 2.5; flex-shrink: 0;" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="9 11 12 14 22 4"/>
+        </svg>
+        <span id="toast-message" style="font-size: 1.05rem; font-weight: 500; line-height: 1.5; margin-left: 12px;">${message}</span>
+      `;
+      toastEl.offsetHeight;
+      toastEl.classList.add('show');
+      toastTimeout = setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 5000);
+    }
+
+    // Full Report PDF download functionality
+    function downloadCompleteReportPDF() {
+      showProgressToast("Compiling redesign assessment report...");
+
+      // Clone the main element
+      const mainEl = document.querySelector('main');
+      if (!mainEl) {
+        toast("Error: main element not found.");
+        return;
+      }
+      
+      const clone = mainEl.cloneNode(true);
+
+      // Clean up the clone for PDF output
+      // 1. Remove OneDrive link-card in questionnaire (Section B) and at the bottom
+      const linkCards = clone.querySelectorAll('.link-card');
+      linkCards.forEach(card => card.remove());
+
+      // 2. Remove submit options / buttons
+      const questionnaireActions = clone.querySelectorAll('.questionnaire-actions');
+      questionnaireActions.forEach(el => el.remove());
+
+      // 3. Replace textarea elements with div containing text
+      const textareas = clone.querySelectorAll('textarea');
+      textareas.forEach(textarea => {
+        const val = textarea.value.trim() || '[No Response Provided]';
+        const valDiv = document.createElement('div');
+        valDiv.className = 'pdf-replaced-textarea';
+        valDiv.innerHTML = val.replace(/\n/g, '<br>');
+        valDiv.style.border = '1px solid #cbd5e1';
+        valDiv.style.padding = '8px 12px';
+        valDiv.style.backgroundColor = '#f8fafc';
+        valDiv.style.borderRadius = '6px';
+        valDiv.style.fontSize = '13px';
+        valDiv.style.color = '#334155';
+        valDiv.style.minHeight = '40px';
+        valDiv.style.whiteSpace = 'pre-wrap';
+        textarea.parentNode.replaceChild(valDiv, textarea);
+      });
+
+      // 4. Replace select elements with div containing option text
+      const selects = clone.querySelectorAll('select');
+      selects.forEach(select => {
+        let val = select.options[select.selectedIndex].text;
+        if (select.selectedIndex === 0 || val.includes('Select ')) {
+          val = '[No Option Selected]';
+        }
+        const valDiv = document.createElement('div');
+        valDiv.className = 'pdf-replaced-select';
+        valDiv.innerText = val;
+        valDiv.style.border = '1px solid #cbd5e1';
+        valDiv.style.padding = '6px 12px';
+        valDiv.style.backgroundColor = '#f8fafc';
+        valDiv.style.borderRadius = '6px';
+        valDiv.style.fontSize = '13px';
+        valDiv.style.color = '#334155';
+        select.parentNode.replaceChild(valDiv, select);
+      });
+
+      // 5. Replace text inputs (like the metric fields)
+      const textInputs = clone.querySelectorAll('input[type="text"]');
+      textInputs.forEach(input => {
+        const val = input.value.trim() || '[Not Answered]';
+        const valDiv = document.createElement('div');
+        valDiv.className = 'pdf-replaced-input';
+        valDiv.innerText = val;
+        valDiv.style.border = '1px solid #cbd5e1';
+        valDiv.style.padding = '6px 12px';
+        valDiv.style.backgroundColor = '#f8fafc';
+        valDiv.style.borderRadius = '6px';
+        valDiv.style.fontSize = '13px';
+        valDiv.style.color = '#334155';
+        input.parentNode.replaceChild(valDiv, input);
+      });
+
+      // 6. Replace score inputs
+      const scoreInputs = clone.querySelectorAll('.score-input');
+      scoreInputs.forEach(input => {
+        const val = input.value.trim() || '--';
+        const valSpan = document.createElement('span');
+        valSpan.innerText = val + '/10';
+        valSpan.style.fontWeight = 'bold';
+        valSpan.style.color = 'var(--accent, #4f46e5)';
+        input.parentNode.replaceChild(valSpan, input);
+      });
+
+      // Create temporary wrapper and insert styles
+      const wrapper = document.createElement('div');
+      wrapper.className = 'pdf-export-root';
+      wrapper.appendChild(clone);
+
+      const style = document.createElement('style');
+      style.textContent = `
+        .pdf-export-root {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          color: #0f172a !important;
+          background-color: #ffffff !important;
+          padding: 15px !important;
+        }
+        .pdf-export-root h1, .pdf-export-root h2, .pdf-export-root h3, .pdf-export-root h4 {
+          color: #0f172a !important;
+        }
+        .pdf-export-root section {
+          border: 1px solid #e2e8f0 !important;
+          background-color: #ffffff !important;
+          box-shadow: none !important;
+          padding: 20px !important;
+          margin-bottom: 25px !important;
+          page-break-inside: avoid;
+        }
+        .pdf-export-root table {
+          border: 1px solid #e2e8f0 !important;
+          background-color: #ffffff !important;
+        }
+        .pdf-export-root th {
+          background-color: #f1f5f9 !important;
+          color: #0f172a !important;
+          border-bottom: 2px solid #cbd5e1 !important;
+        }
+        .pdf-export-root td {
+          border-bottom: 1px solid #e2e8f0 !important;
+          color: #334155 !important;
+        }
+        /* Explicitly add page break styles */
+        .pdf-page-break {
+          page-break-before: always;
+        }
+      `;
+      wrapper.appendChild(style);
+
+      // Add section breaks in the clone to make it look clean
+      const sections = clone.querySelectorAll('section');
+      sections.forEach((section, idx) => {
+        // Let's add page breaks before sections except the first one
+        if (idx > 0) {
+          section.classList.add('pdf-page-break');
+        }
+      });
+
+      const opt = {
+        margin: [15, 15, 15, 15],
+        filename: 'greg-sher-redesign-assessment.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().from(wrapper).set(opt).save().then(() => {
+        showSuccessToast("Assessment Report PDF downloaded successfully!");
+      }).catch(err => {
+        console.error(err);
+        toast("Error generating PDF: " + err.message);
+      });
+    }
+
+    // Questionnaire Responses PDF download functionality
+    function downloadQuestionnairePDF() {
+      showProgressToast("Compiling questionnaire responses...");
+
+      const inputs = document.querySelectorAll('.q-input');
+      let currentSection = '';
+      let sectionsHTML = '';
+      let sectionContentHTML = '';
+
+      inputs.forEach(input => {
+        // Skip elements that are not currently displayed (hidden/toggled off)
+        if (input.offsetParent === null) {
+          return;
+        }
+
+        const section = input.getAttribute('data-section') || 'General';
+        const question = input.getAttribute('data-question') || 'Question';
+        let value = '';
+
+        if (input.tagName === 'SELECT') {
+          value = input.options[input.selectedIndex].text;
+          if (input.selectedIndex === 0 || value.includes('Select ')) {
+            value = '';
+          }
+        } else {
+          value = input.value.trim();
+        }
+
+        if (!value) {
+          value = '<span style="color: #94a3b8; font-style: italic;">[No Response Provided]</span>';
+        } else {
+          value = value.replace(/\n/g, '<br>');
+        }
+
+        if (section !== currentSection) {
+          if (currentSection !== '') {
+            sectionsHTML += `
+              <div class="pdf-section">
+                <h3 class="pdf-section-title">${currentSection}</h3>
+                <div class="pdf-qa-list">
+                  ${sectionContentHTML}
+                </div>
+              </div>
+            `;
+          }
+          currentSection = section;
+          sectionContentHTML = '';
+        }
+
+        sectionContentHTML += `
+          <div class="pdf-qa-item">
+            <div class="pdf-question">${question}</div>
+            <div class="pdf-answer">${value}</div>
+          </div>
+        `;
+      });
+
+      // Add the last section
+      if (currentSection !== '') {
+        sectionsHTML += `
+          <div class="pdf-section">
+            <h3 class="pdf-section-title">${currentSection}</h3>
+            <div class="pdf-qa-list">
+              ${sectionContentHTML}
+            </div>
+          </div>
+        `;
+      }
+
+      // If no responses at all
+      if (sectionsHTML === '') {
+        sectionsHTML = `
+          <div style="text-align: center; padding: 40px; color: #64748b;">
+            <p style="font-size: 16px; font-weight: 500; margin-bottom: 8px;">No questionnaire questions answered.</p>
+            <p style="font-size: 14px;">Please fill out the intake form before downloading the PDF.</p>
+          </div>
+        `;
+      }
+
+      // Define the container
+      const container = document.createElement('div');
+      container.className = 'pdf-questionnaire-root';
+      container.innerHTML = `
+        <div class="pdf-header">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #4f46e5; padding-bottom: 15px; margin-bottom: 20px;">
+            <div>
+              <h1 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2;">GREG SHER BRAND EXPERIENCE</h1>
+              <h2 style="font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; color: #4f46e5; margin: 5px 0 0 0; text-transform: uppercase; letter-spacing: 0.05em;">Client Discovery Intake Questionnaire</h2>
+            </div>
+            <div style="text-align: right; flex-shrink: 0;">
+              <span style="font-size: 10px; font-weight: 700; color: #0ea5e9; background-color: #e0f2fe; padding: 4px 10px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em;">Intake Form</span>
+              <div style="font-size: 11px; color: #64748b; margin-top: 8px;">Date: ${new Date().toLocaleDateString()}</div>
+            </div>
+          </div>
+          
+          <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 15px; margin-bottom: 25px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; color: #475569; line-height: 1.4;">
+            <div><strong>Client Site:</strong> <a href="https://www.gregsher.biz/" target="_blank" style="color: #4f46e5; text-decoration: none;">gregsher.biz</a></div>
+            <div><strong>Agency Partner:</strong> Evoltech Group</div>
+            <div><strong>Contact:</strong> priyanka@evoltechgroup.com</div>
+            <div><strong>Status:</strong> Completed Assessment Responses</div>
+          </div>
+        </div>
+        
+        <div class="pdf-body">
+          ${sectionsHTML}
+        </div>
+        
+        <div class="pdf-footer" style="margin-top: 30px; border-top: 1px solid #e2e8f0; padding-top: 15px; text-align: center; font-size: 11px; color: #94a3b8;">
+          Prepared by EvolTech Group &bull; Confidential
+        </div>
+      `;
+
+      // Append temporary style sheet to container
+      const style = document.createElement('style');
+      style.textContent = `
+        .pdf-questionnaire-root {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          color: #0f172a;
+          padding: 10px;
+          line-height: 1.5;
+        }
+        .pdf-section {
+          margin-bottom: 25px;
+          page-break-inside: avoid;
+        }
+        .pdf-section-title {
+          font-family: 'Outfit', sans-serif;
+          font-size: 15px;
+          font-weight: 700;
+          color: #4f46e5;
+          border-bottom: 1px solid #e2e8f0;
+          padding-bottom: 6px;
+          margin-top: 0;
+          margin-bottom: 12px;
+          text-transform: uppercase;
+          letter-spacing: 0.02em;
+        }
+        .pdf-qa-list {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .pdf-qa-item {
+          page-break-inside: avoid;
+        }
+        .pdf-question {
+          font-size: 12px;
+          font-weight: 700;
+          color: #1e293b;
+          margin-bottom: 4px;
+        }
+        .pdf-answer {
+          font-size: 12px;
+          color: #334155;
+          background-color: #f8fafc;
+          border: 1px solid #e2e8f0;
+          border-radius: 6px;
+          padding: 8px 12px;
+          min-height: 20px;
+          white-space: pre-wrap;
+        }
+      `;
+      container.appendChild(style);
+
+      // Set options for html2pdf
+      const opt = {
+        margin: [15, 15, 15, 15],
+        filename: 'greg-sher-questionnaire-responses.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, logging: false },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().from(container).set(opt).save().then(() => {
+        showSuccessToast("Questionnaire PDF downloaded successfully!");
+      }).catch(err => {
+        console.error(err);
+        toast("Error generating PDF: " + err.message);
+      });
     }
   </script>
 
