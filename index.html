@@ -22,6 +22,7 @@
       rel="stylesheet"
     />
 
+
     <style>
       /* CSS Variables for Light/Dark Theme */
       :root {
@@ -760,68 +761,64 @@
         text-decoration: underline;
       }
 
-      /* Print-Friendly Settings */
+      /* ── Print / PDF styles (questionnaire only) ── */
       @media print {
-        body {
-          background-color: #ffffff !important;
-          color: #000000 !important;
-          font-size: 11pt;
-        }
-        .wrapper {
-          display: block !important;
-        }
-        aside,
-        .top-header,
-        .header-actions,
-        .questionnaire-actions,
-        .theme-toggle,
-        .btn {
+        /* Hide everything except the questionnaire section */
+        body.print-questionnaire-only aside,
+        body.print-questionnaire-only .top-header,
+        body.print-questionnaire-only .header-actions,
+        body.print-questionnaire-only .questionnaire-actions,
+        body.print-questionnaire-only .theme-toggle,
+        body.print-questionnaire-only .btn {
           display: none !important;
         }
-        main {
+        body.print-questionnaire-only section:not(#discovery-questionnaire) {
+          display: none !important;
+        }
+        body.print-questionnaire-only .wrapper {
+          display: block !important;
+        }
+        body.print-questionnaire-only main {
           padding: 0 !important;
           max-width: 100% !important;
         }
-        section {
+        body.print-questionnaire-only #discovery-questionnaire {
+          display: block !important;
           border: none !important;
           box-shadow: none !important;
           padding: 0 !important;
-          margin-bottom: 2.5rem !important;
-          page-break-inside: avoid;
         }
-        .section-title {
-          border-bottom: 1px solid #000000 !important;
-          margin-top: 1.5rem;
+        body.print-questionnaire-only .section-title svg {
+          display: none !important;
         }
-        table {
-          border: 1px solid #000000 !important;
-          page-break-inside: avoid;
-        }
-        th {
-          background-color: #f1f5f9 !important;
+        body {
+          background: #ffffff !important;
           color: #000000 !important;
-          border-bottom: 2px solid #000000 !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
         }
-        td {
-          border-bottom: 1px solid #e2e8f0 !important;
-          color: #000000 !important;
+        /* Print mirror: hide native fields, show plain-text mirrors */
+        body.print-questionnaire-only input.has-print-mirror,
+        body.print-questionnaire-only textarea.has-print-mirror,
+        body.print-questionnaire-only select.has-print-mirror {
+          display: none !important;
         }
-        .score-input {
-          border: none !important;
-          background: transparent !important;
-          width: auto !important;
+        .print-mirror {
+          display: block !important;
+          width: 100%;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          padding: 9px 12px;
+          min-height: 38px;
+          white-space: pre-wrap;
+          word-break: break-word;
+          background: #fff;
+          color: #111;
+          font-size: 12px;
+          margin-top: 4px;
         }
-        .q-textarea,
-        .q-select {
-          border: 1px solid #cccccc !important;
-          background: transparent !important;
-        }
-        .score-bar {
-          border: 1px solid #000000 !important;
-          background-color: transparent !important;
-        }
-        .score-bar-fill {
-          background-color: #666666 !important;
+        .questionnaire-group {
+          break-inside: avoid;
         }
       }
 
@@ -1149,7 +1146,16 @@
                 >Dark Mode</span
               >
             </button>
+            <button
+              class="btn btn-outline"
+              id="printpdf-btn"
+              type="button"
+              onclick="exportPDF()">
+              <svg style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:middle;margin-right:6px;" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              Export PDF
+            </button>
           </div>
+          
         </header>
 
         <!-- Main Document Body -->
@@ -1513,7 +1519,9 @@
           </section>
 
           <!-- Section 6: Client Discovery Questionnaire -->
+           
           <section id="discovery-questionnaire">
+            
             <h2 class="section-title">
               <svg
                 viewBox="0 0 24 24"
@@ -1540,7 +1548,7 @@
               submit your responses directly via email, or use the OneDrive link
               to upload files.
             </p>
-
+            <div id="pdf-content">
             <form id="questionnaire-form">
               <!-- Section A: Access & Technical Details -->
               <div class="questionnaire-group">
@@ -2145,9 +2153,7 @@
                     <thead>
                       <tr>
                         <th style="width: 45%">Stat / Achievement Category</th>
-                        <th style="width: 55%">
-                          Target Numbers or Details (e.g. "5,000+", "25 Years")
-                        </th>
+                        <th style="width: 55%">Your Response</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -2289,6 +2295,7 @@
                 </div>
               </div>
             </form>
+            </div>
           </section>
 
           <!-- Section 7: Final Recommendation -->
@@ -2562,13 +2569,13 @@
         return textContent;
       }
 
-      // Send responses — open pre-filled email
+      // Send responses — open pre-filled email immediately
       function sendQuestionnaire() {
         const textContent = getCompiledAnswersText();
         const subject = "Greg Sher Website Discovery Responses";
         const mailtoUrl = `mailto:tom@evoltechgroup.com,priyanka@evoltechgroup.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(textContent)}`;
+        toast("Opening email client with your responses pre-filled.");
         window.location.href = mailtoUrl;
-        toast("Opening your email client with your responses pre-filled.");
       }
 
 
@@ -2603,6 +2610,22 @@
           toastEl.classList.remove("show");
         }, duration);
       }
+    </script>
+    <script>
+      // ── Print section 5 (Client Discovery Questionnaire) only ──
+      function exportPDF() {
+        document.body.classList.add('print-questionnaire-only');
+        setTimeout(() => {
+          window.print();
+        }, 150);
+      }
+
+      window.addEventListener('beforeprint', () => {
+        document.body.classList.add('print-questionnaire-only');
+      });
+      window.addEventListener('afterprint', () => {
+        document.body.classList.remove('print-questionnaire-only');
+      });
     </script>
   </body>
 </html>
